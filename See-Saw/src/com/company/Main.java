@@ -1,10 +1,10 @@
 package com.company;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.*;
 public class Main {
     private static boolean GoingUp = false;
     private static boolean CurrentTurn = false;
-    private static int Iterations = 10;
+    private static int Iterations = 100;
     public static void main(String[] args) {
 	    try {
 	        console();
@@ -14,8 +14,7 @@ public class Main {
     }
     private static void console() throws IOException {
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("Press any key to start simulator");
-        keyboard.nextLine();
+        System.out.println("Press enter to start simulator");
         Start_Simulator();
     }
     private static void Start_Simulator()  {
@@ -35,24 +34,25 @@ public class Main {
         private void checkDirectionChange() {
             if(Height <= 1) {
                 GoingUp = true;
-                System.out.println("Fred going Up");
+                System.out.print("  Fred going Up   ");
 
             }
             if(Height == 7) {
                 GoingUp = false;
-                System.out.println("Fred going Down");
+                System.out.print("  Fred going Down   ");
             }
         }
         private void releaseLock()   {
             CurrentTurn = !CurrentTurn;
         }
         private void processStep()  {
-            System.out.println("Fred's Height is: " + Height);
-
             while(!CurrentTurn)  {
                 // Locked out
+                System.out.print("");
             }
+            System.out.printf("%-20s %-10.2f", "Fred's Height is:", Height);
             checkDirectionChange();
+            System.out.println("\n------------------------------");
             releaseLock();
             if(GoingUp) {
                 goUp();
@@ -84,11 +84,11 @@ public class Main {
         private void checkDirectionChange() {
             if(Height <= 1) {
                 GoingUp = false;
-                System.out.println("Wilma going Up");
+                System.out.print("  Wilma going Up  ");
             }
             if(Height == 7) {
                 GoingUp = true;
-                System.out.println("Wilma going Down");
+                System.out.print("  Wilma going Down    ");
 
             }
         }
@@ -96,11 +96,12 @@ public class Main {
             CurrentTurn = !CurrentTurn;
         }
         private void processStep()  {
-            System.out.println("Wilma's Height is: " + Height);
-
             while(CurrentTurn)  {
                 // Locked out
+                System.out.print("");
+
             }
+            System.out.printf("%-20s %-10.2f", "Wilma's Height is:", Height);
             checkDirectionChange();
             releaseLock();
             if(!GoingUp) {
@@ -119,6 +120,7 @@ public class Main {
                     e.printStackTrace();
                 }
                 processStep();
+                System.out.println();
             }
         }
     }
